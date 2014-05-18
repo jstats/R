@@ -27,7 +27,7 @@ StepsMax
 ```
 ##Imputing missing values
 
-
+```{r}
 Missing_data<-data[!complete.cases(data),]
 nrow(Missing_data)
 
