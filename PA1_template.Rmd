@@ -1,0 +1,44 @@
+=============================================
+Reproducible Research Assignment 
+
+============================================
+        Loading and Processing Data
+===========================================
+```{r}
+setwd("C:/Users/jwambua/Documents/My Stats/R language/Reproducible research")
+data<-read.csv("activity.csv", header=T, sep=",")
+attach(data)
+str(data)
+hist(steps, main="Histogram of Steps")
+mean(steps, na.rm=T)
+median(steps, na.rm=T) 
+```
+
+
+##Average daily activity pattern
+
+```{r}
+StepsMean<-tapply(steps, interval, mean, na.rm=T)
+StepsInterval=unique(interval)
+Steps=data.frame(StepsInterval, StepsMean)
+plot(StepsInterval,StepsMean, type="l", ylab="Average steps", xlab="Interval")
+StepsMax=subset(Steps, Steps$StepsMean==max(Steps$StepsMean))
+StepsMax
+```
+##Imputing missing values
+
+
+Missing_data<-data[!complete.cases(data),]
+nrow(Missing_data)
+
+
+##data Imputation
+
+data[is.na(data)]<-mean(steps, na.rm=T)
+attach(data)
+hist(steps)
+tapply(steps, date,mean)
+tapply(steps, date,median)
+```
+
+
